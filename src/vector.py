@@ -2,11 +2,11 @@ import hashlib
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 from langchain_qdrant import QdrantVectorStore
-from config import QDRANT_PATH, COLLECTION_NAME, EMBEDDING_DIMENSIONS, RETRIEVER_K, RETRIEVER_SEARCH_TYPE
+from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIMENSIONS, RETRIEVER_K, RETRIEVER_SEARCH_TYPE
 
 
 def get_client():
-    return QdrantClient(path=QDRANT_PATH)
+    return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
 
 def ensure_collection(client):

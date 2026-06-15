@@ -1,3 +1,5 @@
+import os
+
 # Embedding
 EMBEDDING_MODEL      = "text-embedding-3-small"
 EMBEDDING_DIMENSIONS = 1536
@@ -16,7 +18,8 @@ RETRIEVER_K           = 5
 RETRIEVER_SEARCH_TYPE = "mmr"
 
 # Qdrant
-QDRANT_PATH     = "./qdrant_storage"
+QDRANT_URL      = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY  = os.getenv("QDRANT_API_KEY", None)
 COLLECTION_NAME = "docs_general"
 
 # File handling
