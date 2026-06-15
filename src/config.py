@@ -1,0 +1,24 @@
+# Embedding
+EMBEDDING_MODEL      = "text-embedding-3-small"
+EMBEDDING_DIMENSIONS = 1536
+
+# LLM
+ANTHROPIC_MODEL = "claude-opus-4-6"
+TEMPERATURE     = 0.0
+MAX_TOKENS      = 2048
+
+# Chunking
+CHUNK_SIZE    = 800
+CHUNK_OVERLAP = 100
+
+# Retrieval
+RETRIEVER_K           = 5
+RETRIEVER_SEARCH_TYPE = "mmr"
+
+# Qdrant
+QDRANT_PATH     = "./qdrant_storage"
+COLLECTION_NAME = "docs_general"
+
+# File handling
+SUPPORTED_EXTENSIONS = [".pdf", ".docx", ".txt"]
+MAX_FILE_SIZE_MB     = 50
