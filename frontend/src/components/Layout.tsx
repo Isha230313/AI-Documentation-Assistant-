@@ -20,7 +20,7 @@ export default function Layout({ children }: Props) {
   const isAdmin = location.pathname === '/admin'
 
   return (
-    <div className="relative min-h-screen flex flex-col" style={{ backgroundColor: '#07030f' }}>
+    <div className="relative min-h-screen flex flex-col" style={{ backgroundColor: '#130d35' }}>
       <OrbBackground />
 
       {/* Top bar */}

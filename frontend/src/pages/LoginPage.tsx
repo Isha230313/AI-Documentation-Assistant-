@@ -54,7 +54,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#0d0720' }}>
+    <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#130d35' }}>
       <OrbBackground />
 
       <div className="relative z-10 w-full max-w-md animate-slide-up">

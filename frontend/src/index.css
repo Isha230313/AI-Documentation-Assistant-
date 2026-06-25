@@ -20,7 +20,9 @@
   }
 
   body {
-    background-color: #0d0720;
+    background-color: #130d35;
+    background-image: radial-gradient(ellipse at 0% 0%, rgba(99,102,241,0.12) 0%, transparent 60%),
+                      radial-gradient(ellipse at 100% 100%, rgba(236,72,153,0.10) 0%, transparent 60%);
     color: #ffffff;
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -50,16 +52,16 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl;
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl;
   }
 
   .neon-btn {
     @apply relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm
-           bg-gradient-to-r from-indigo-400 to-violet-400 text-white
-           hover:from-indigo-300 hover:to-violet-300
+           bg-gradient-to-r from-indigo-400 to-violet-500 text-white
+           hover:from-indigo-300 hover:to-violet-400
            transition-all duration-200
-           shadow-lg shadow-indigo-500/40 hover:shadow-indigo-500/60
-           focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-[#0d0720];
+           shadow-lg shadow-indigo-500/50 hover:shadow-indigo-400/70
+           focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-[#130d35];
   }
 
   .neon-btn:active {
@@ -75,15 +77,15 @@
 
   .ghost-btn {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm
-           text-white/80 border border-white/20 hover:border-white/35 hover:text-white hover:bg-white/10
+           text-white/90 border border-white/25 hover:border-indigo-400/60 hover:text-white hover:bg-indigo-500/10
            transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-[#0d0720];
+           focus:outline-none focus:ring-2 focus:ring-indigo-400/50 focus:ring-offset-2 focus:ring-offset-[#130d35];
   }
 
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15
-           text-white placeholder-white/40
-           focus:outline-none focus:ring-2 focus:ring-indigo-400/80 focus:border-indigo-400/80
+    @apply w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20
+           text-white placeholder-white/50
+           focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400
            transition-all duration-200;
   }
 
