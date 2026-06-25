@@ -1,0 +1,33 @@
+services:
+
+  # ── Vector database ─────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  # ── FastAPI backend ─────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: doc_assistant_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      - qdrant
+    volumes:
+      - ./api/users.json:/app/api/users.json   # persist users between restarts
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:

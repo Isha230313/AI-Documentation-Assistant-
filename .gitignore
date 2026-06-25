@@ -8,3 +8,13 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Secrets
+.env
+
+# Vector DB storage (generated at runtime)
+qdrant_storage/
+
+# Frontend dependencies
+frontend/node_modules/
+frontend/dist/
