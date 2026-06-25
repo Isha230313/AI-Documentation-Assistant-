@@ -8,11 +8,9 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#07030f',
-          indigo: '#6366f1',
-          violet: '#8b5cf6',
-          pink: '#ec4899',
-          'pink-light': '#f472b6',
+          bg: '#0a0a0a',
+          white: '#ffffff',
+          gray: '#a0a0a0',
         },
       },
       fontFamily: {
@@ -38,8 +36,8 @@ export default {
           to: { opacity: '1', transform: 'translateY(0)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.4)' },
-          '50%': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.7)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(255, 255, 255, 0.15)' },
+          '50%': { boxShadow: '0 0 40px rgba(255, 255, 255, 0.30)' },
         },
         'spin-slow': {
           from: { transform: 'rotate(0deg)' },

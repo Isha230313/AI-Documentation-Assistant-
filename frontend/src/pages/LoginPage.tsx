@@ -54,7 +54,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#130d35' }}>
+    <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#0a0a0a' }}>
       <OrbBackground />
 
       <div className="relative z-10 w-full max-w-md animate-slide-up">
@@ -62,7 +62,7 @@ export default function LoginPage() {
           <div className="flex items-center justify-center mb-4">
             <div
               className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl font-extrabold text-white"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', boxShadow: '0 0 32px rgba(99,102,241,0.5)' }}
+              style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)', boxShadow: '0 0 32px rgba(59,130,246,0.5)' }}
             >
               A
             </div>
@@ -71,7 +71,7 @@ export default function LoginPage() {
           <p className="text-white/40 text-sm">Sign in to your Documentation Assistant</p>
         </div>
 
-        <div className="glass-card p-8" style={{ boxShadow: '0 0 40px rgba(99,102,241,0.08), 0 24px 64px rgba(0,0,0,0.5)' }}>
+        <div className="glass-card p-8" style={{ boxShadow: '0 0 40px rgba(59,130,246,0.08), 0 24px 64px rgba(0,0,0,0.5)' }}>
           <form onSubmit={handleSubmit} noValidate className="space-y-5">
             {errorMsg && (
               <div className="error-banner" role="alert">

@@ -5,7 +5,7 @@ export default function OrbBackground() {
       className="pointer-events-none fixed inset-0 overflow-hidden"
       style={{ zIndex: 0 }}
     >
-      {/* Orb 1 — indigo / violet, top-left */}
+      {/* Orb 1 — blue, top-left */}
       <div
         className="absolute animate-orb-float-1"
         style={{
@@ -17,13 +17,13 @@ export default function OrbBackground() {
           maxHeight: '800px',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle at 40% 40%, rgba(99,102,241,0.75) 0%, rgba(139,92,246,0.45) 40%, transparent 70%)',
+            'radial-gradient(circle at 40% 40%, rgba(59,130,246,0.75) 0%, rgba(37,99,235,0.45) 40%, transparent 70%)',
           filter: 'blur(35px)',
           willChange: 'transform',
         }}
       />
 
-      {/* Orb 2 — pink / fuchsia, bottom-right */}
+      {/* Orb 2 — cyan, bottom-right */}
       <div
         className="absolute animate-orb-float-2"
         style={{
@@ -35,13 +35,13 @@ export default function OrbBackground() {
           maxHeight: '750px',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle at 60% 60%, rgba(236,72,153,0.65) 0%, rgba(168,85,247,0.40) 40%, transparent 70%)',
+            'radial-gradient(circle at 60% 60%, rgba(6,182,212,0.65) 0%, rgba(14,165,233,0.40) 40%, transparent 70%)',
           filter: 'blur(35px)',
           willChange: 'transform',
         }}
       />
 
-      {/* Orb 3 — cyan accent, center */}
+      {/* Orb 3 — sky accent, center */}
       <div
         className="absolute"
         style={{
@@ -53,7 +53,7 @@ export default function OrbBackground() {
           maxHeight: '500px',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle at 50% 50%, rgba(6,182,212,0.18) 0%, rgba(99,102,241,0.10) 50%, transparent 75%)',
+            'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.18) 0%, rgba(59,130,246,0.10) 50%, transparent 75%)',
           filter: 'blur(60px)',
         }}
       />
@@ -63,8 +63,8 @@ export default function OrbBackground() {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(99,102,241,0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99,102,241,0.07) 1px, transparent 1px)
+            linear-gradient(rgba(59,130,246,0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59,130,246,0.07) 1px, transparent 1px)
           `,
           backgroundSize: '64px 64px',
           opacity: 0.4,

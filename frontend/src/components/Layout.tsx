@@ -20,7 +20,7 @@ export default function Layout({ children }: Props) {
   const isAdmin = location.pathname === '/admin'
 
   return (
-    <div className="relative min-h-screen flex flex-col" style={{ backgroundColor: '#130d35' }}>
+    <div className="relative min-h-screen flex flex-col" style={{ backgroundColor: '#0a0a0a' }}>
       <OrbBackground />
 
       {/* Top bar */}
@@ -33,8 +33,8 @@ export default function Layout({ children }: Props) {
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center text-lg font-bold"
             style={{
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-              boxShadow: '0 0 16px rgba(99,102,241,0.5)',
+              background: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
+              boxShadow: '0 0 16px rgba(59,130,246,0.5)',
             }}
           >
             A
@@ -68,9 +68,9 @@ export default function Layout({ children }: Props) {
                   <span
                     className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-medium"
                     style={{
-                      background: 'rgba(139,92,246,0.2)',
-                      border: '1px solid rgba(139,92,246,0.4)',
-                      color: '#a78bfa',
+                      background: 'rgba(6,182,212,0.2)',
+                      border: '1px solid rgba(6,182,212,0.4)',
+                      color: '#67e8f9',
                     }}
                   >
                     admin

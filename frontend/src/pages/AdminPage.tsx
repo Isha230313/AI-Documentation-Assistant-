@@ -74,7 +74,7 @@ function FileUploadSection() {
     <section className="glass-card p-6 space-y-5">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-          style={{ background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)' }}>
+          style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)' }}>
           📄
         </div>
         <div>
@@ -92,8 +92,8 @@ function FileUploadSection() {
         role="button" tabIndex={0}
         className="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 focus:outline-none"
         style={{
-          borderColor: dragOver ? 'rgba(99,102,241,0.8)' : 'rgba(99,102,241,0.25)',
-          background: dragOver ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.04)',
+          borderColor: dragOver ? 'rgba(59,130,246,0.8)' : 'rgba(59,130,246,0.25)',
+          background: dragOver ? 'rgba(59,130,246,0.1)' : 'rgba(59,130,246,0.04)',
         }}
       >
         <input ref={inputRef} type="file" multiple accept={ACCEPTED_TYPES.join(',')}
@@ -113,7 +113,7 @@ function FileUploadSection() {
           {files.map((file) => (
             <li key={file.name + file.size}
               className="flex items-center gap-3 px-4 py-2.5 rounded-xl"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <span className="text-lg shrink-0">
                 {file.type === 'application/pdf' ? '📕' : file.type.includes('word') ? '📘' : '📄'}
               </span>
@@ -138,7 +138,7 @@ function FileUploadSection() {
           </div>
           <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
             <div className="h-full rounded-full transition-all duration-300"
-              style={{ width: `${uploadProgress}%`, background: 'linear-gradient(90deg, #6366f1, #8b5cf6)' }} />
+              style={{ width: `${uploadProgress}%`, background: 'linear-gradient(90deg, #3b82f6, #06b6d4)' }} />
           </div>
         </div>
       )}
@@ -202,7 +202,7 @@ function UrlIngestSection() {
     <section className="glass-card p-6 space-y-5">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-          style={{ background: 'rgba(236,72,153,0.15)', border: '1px solid rgba(236,72,153,0.3)' }}>
+          style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)' }}>
           🌐
         </div>
         <div>
@@ -221,7 +221,7 @@ function UrlIngestSection() {
         />
         {validUrlCount > 0 && (
           <span className="absolute bottom-3 right-3 text-[11px] px-2 py-0.5 rounded-full"
-            style={{ background: 'rgba(99,102,241,0.2)', border: '1px solid rgba(99,102,241,0.3)', color: '#a78bfa' }}>
+            style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(59,130,246,0.3)', color: '#3b82f6' }}>
             {validUrlCount} URL{validUrlCount !== 1 ? 's' : ''}
           </span>
         )}
@@ -231,7 +231,7 @@ function UrlIngestSection() {
       {errorMsg && <div className="error-banner animate-fade-in" role="alert"><span>{errorMsg}</span></div>}
 
       <button onClick={handleIngest} disabled={validUrlCount === 0 || isLoading}
-        className="neon-btn-pink w-full justify-center py-3 disabled:opacity-40 disabled:cursor-not-allowed">
+        className="neon-btn w-full justify-center py-3 disabled:opacity-40 disabled:cursor-not-allowed">
         {isLoading
           ? <><Spinner /><span>Ingesting URLs…</span></>
           : <span>Ingest {validUrlCount > 0 ? `${validUrlCount} URL${validUrlCount !== 1 ? 's' : ''}` : 'URLs'}</span>}
@@ -276,8 +276,8 @@ function CollectionStats() {
         <>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { label: 'Total Vectors', value: data.total_vectors.toLocaleString(), icon: '🔢', accent: '#6366f1' },
-              { label: 'Collections',   value: data.total_collections,              icon: '🗂️', accent: '#ec4899' },
+              { label: 'Total Vectors', value: data.total_vectors.toLocaleString(), icon: '🔢', accent: '#3b82f6' },
+              { label: 'Collections',   value: data.total_collections,              icon: '🗂️', accent: '#06b6d4' },
             ].map(({ label, value, icon, accent }) => (
               <div key={label} className="glass-card p-5 flex items-center gap-4" style={{ borderColor: `${accent}30` }}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
@@ -298,7 +298,7 @@ function CollectionStats() {
                   style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <span className="text-sm text-white/70 font-medium truncate">{col.name}</span>
                   <span className="text-xs font-semibold shrink-0 ml-2 px-2 py-0.5 rounded-full"
-                    style={{ background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.25)', color: '#a78bfa' }}>
+                    style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.25)', color: '#3b82f6' }}>
                     {col.vectors.toLocaleString()} vectors
                   </span>
                 </div>
@@ -336,7 +336,7 @@ function IndexedSources() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-            style={{ background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)' }}>
+            style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)' }}>
             🗂️
           </div>
           <div>
@@ -365,7 +365,7 @@ function IndexedSources() {
         <ul className="space-y-2">
           {sources.map((src) => (
             <li key={src} className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
               <span className="text-sm text-white/70 truncate flex-1" title={src}>
                 {src.startsWith('http') ? '🌐' : '📄'} {src}
               </span>
