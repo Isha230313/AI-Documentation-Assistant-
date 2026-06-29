@@ -11,6 +11,18 @@ services:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
 
+  # ── React frontend ──────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: doc_assistant_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
   # ── FastAPI backend ─────────────────────────────────────────
   api:
     build:
