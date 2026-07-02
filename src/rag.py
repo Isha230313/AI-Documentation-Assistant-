@@ -1,4 +1,3 @@
-print("[rag.py] NEW VERSION LOADED")
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
@@ -39,9 +38,6 @@ def build_chain():
 def ask(question, llm, retriever):
     docs = retriever.invoke(question)
 
-    print(f"\n[DEBUG] Question: {question}")
-    print(f"[DEBUG] Docs retrieved: {len(docs)}")
-
     if docs:
         context = format_context(docs)
         prompt  = RAG_PROMPT
@@ -54,31 +50,3 @@ def ask(question, llm, retriever):
         sources = []
 
     return {"answer": answer, "sources": sources}
-
-
-if __name__ == "__main__":
-    from embedding import get_embeddings
-    from vector import get_retriever
-
-    embeddings = get_embeddings()
-    retriever  = get_retriever(embeddings)
-    llm        = build_chain()
-
-    print("=" * 50)
-    print("  AI Documentation Assistant")
-    print("  Type 'quit' to exit.")
-    print("=" * 50)
-
-    while True:
-        question = input("\nYou: ").strip()
-        if not question:
-            continue
-        if question.lower() in ("quit", "exit"):
-            print("Goodbye.")
-            break
-        response = ask(question, llm, retriever)
-        print(f"\nAssistant:\n{response['answer']}")
-        if response["sources"]:
-            print("\nSources:")
-            for src in response["sources"]:
-                print(f"  - {src}")

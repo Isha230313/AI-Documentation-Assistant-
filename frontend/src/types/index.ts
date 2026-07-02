@@ -32,13 +32,6 @@ export interface ChatMessage {
   sources?: string[]
 }
 
-export interface ChatSession {
-  id: string
-  title: string
-  messages: ChatMessage[]
-  createdAt: number
-}
-
 // ─── Ingest ───────────────────────────────────────────────────────────────────
 
 export interface IngestResponse {
