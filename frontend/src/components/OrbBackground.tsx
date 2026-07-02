@@ -1,4 +1,14 @@
+import { useThemeStore } from '../store/theme'
+
 export default function OrbBackground() {
+  const { isDark } = useThemeStore()
+
+  const orb1Opacity = isDark ? 0.75 : 0.18
+  const orb2Opacity = isDark ? 0.65 : 0.15
+  const orb1SecondaryOpacity = isDark ? 0.45 : 0.10
+  const orb2SecondaryOpacity = isDark ? 0.40 : 0.08
+  const blurAmount = isDark ? '35px' : '50px'
+
   return (
     <div
       aria-hidden="true"
@@ -9,16 +19,12 @@ export default function OrbBackground() {
       <div
         className="absolute animate-orb-float-1"
         style={{
-          top: '-5%',
-          left: '-5%',
-          width: '65vw',
-          height: '65vw',
-          maxWidth: '800px',
-          maxHeight: '800px',
+          top: '-5%', left: '-5%',
+          width: '65vw', height: '65vw',
+          maxWidth: '800px', maxHeight: '800px',
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle at 40% 40%, rgba(59,130,246,0.75) 0%, rgba(37,99,235,0.45) 40%, transparent 70%)',
-          filter: 'blur(35px)',
+          background: `radial-gradient(circle at 40% 40%, rgba(59,130,246,${orb1Opacity}) 0%, rgba(37,99,235,${orb1SecondaryOpacity}) 40%, transparent 70%)`,
+          filter: `blur(${blurAmount})`,
           willChange: 'transform',
         }}
       />
@@ -27,34 +33,13 @@ export default function OrbBackground() {
       <div
         className="absolute animate-orb-float-2"
         style={{
-          bottom: '-8%',
-          right: '-8%',
-          width: '60vw',
-          height: '60vw',
-          maxWidth: '750px',
-          maxHeight: '750px',
+          bottom: '-8%', right: '-8%',
+          width: '60vw', height: '60vw',
+          maxWidth: '750px', maxHeight: '750px',
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle at 60% 60%, rgba(6,182,212,0.65) 0%, rgba(14,165,233,0.40) 40%, transparent 70%)',
-          filter: 'blur(35px)',
+          background: `radial-gradient(circle at 60% 60%, rgba(6,182,212,${orb2Opacity}) 0%, rgba(14,165,233,${orb2SecondaryOpacity}) 40%, transparent 70%)`,
+          filter: `blur(${blurAmount})`,
           willChange: 'transform',
-        }}
-      />
-
-      {/* Orb 3 — sky accent, center */}
-      <div
-        className="absolute"
-        style={{
-          top: '30%',
-          left: '35%',
-          width: '40vw',
-          height: '40vw',
-          maxWidth: '500px',
-          maxHeight: '500px',
-          borderRadius: '50%',
-          background:
-            'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.18) 0%, rgba(59,130,246,0.10) 50%, transparent 75%)',
-          filter: 'blur(60px)',
         }}
       />
 
@@ -63,11 +48,11 @@ export default function OrbBackground() {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(59,130,246,0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59,130,246,0.07) 1px, transparent 1px)
+            linear-gradient(rgba(59,130,246,${isDark ? 0.07 : 0.04}) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59,130,246,${isDark ? 0.07 : 0.04}) 1px, transparent 1px)
           `,
           backgroundSize: '64px 64px',
-          opacity: 0.4,
+          opacity: isDark ? 0.4 : 0.6,
         }}
       />
     </div>

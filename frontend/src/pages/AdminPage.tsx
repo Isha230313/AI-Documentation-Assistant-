@@ -78,8 +78,8 @@ function FileUploadSection() {
           📄
         </div>
         <div>
-          <h2 className="font-semibold text-white">Upload Documents</h2>
-          <p className="text-xs text-white/40">PDF, DOCX, or TXT files</p>
+          <h2 className="font-semibold text-gray-900 dark:text-white">Upload Documents</h2>
+          <p className="text-xs text-gray-500 dark:text-white/40">PDF, DOCX, or TXT files</p>
         </div>
       </div>
 
@@ -100,10 +100,10 @@ function FileUploadSection() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => addFiles(e.target.files)}
           className="hidden" disabled={isUploading} />
         <div className="text-4xl mb-3">{dragOver ? '📂' : '📁'}</div>
-        <p className="text-white/70 font-medium text-sm">
+        <p className="text-gray-700 dark:text-white/70 font-medium text-sm">
           {dragOver ? 'Drop files here' : 'Drag & drop or click to browse'}
         </p>
-        <p className="text-white/30 text-xs mt-1">
+        <p className="text-gray-500 dark:text-white/40 text-xs mt-1">
           Accepted: {ACCEPTED_TYPES.join(', ')} · Multiple files supported
         </p>
       </div>
@@ -113,17 +113,17 @@ function FileUploadSection() {
           {files.map((file) => (
             <li key={file.name + file.size}
               className="flex items-center gap-3 px-4 py-2.5 rounded-xl"
-              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(0,0,0,0.06)' }}>
               <span className="text-lg shrink-0">
                 {file.type === 'application/pdf' ? '📕' : file.type.includes('word') ? '📘' : '📄'}
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-white/80 truncate font-medium">{file.name}</p>
-                <p className="text-xs text-white/30">{formatBytes(file.size)}</p>
+                <p className="text-sm text-gray-800 dark:text-white/80 truncate font-medium">{file.name}</p>
+                <p className="text-xs text-gray-500 dark:text-white/40">{formatBytes(file.size)}</p>
               </div>
               {!isUploading && (
                 <button onClick={(e) => { e.stopPropagation(); removeFile(file.name) }}
-                  className="text-white/20 hover:text-red-400 transition-colors text-lg leading-none ml-1"
+                  className="text-gray-300 dark:text-white/20 hover:text-red-400 transition-colors text-lg leading-none ml-1"
                   aria-label={`Remove ${file.name}`}>×</button>
               )}
             </li>
@@ -133,10 +133,10 @@ function FileUploadSection() {
 
       {isUploading && uploadProgress > 0 && (
         <div className="space-y-1.5 animate-fade-in">
-          <div className="flex justify-between text-xs text-white/40">
+          <div className="flex justify-between text-xs text-gray-500 dark:text-white/40">
             <span>Uploading…</span><span>{uploadProgress}%</span>
           </div>
-          <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+          <div className="h-1.5 rounded-full bg-gray-200 dark:bg-white/10 overflow-hidden">
             <div className="h-full rounded-full transition-all duration-300"
               style={{ width: `${uploadProgress}%`, background: 'linear-gradient(90deg, #3b82f6, #06b6d4)' }} />
           </div>
@@ -206,8 +206,8 @@ function UrlIngestSection() {
           🌐
         </div>
         <div>
-          <h2 className="font-semibold text-white">Ingest URLs</h2>
-          <p className="text-xs text-white/40">One URL per line · http(s) only</p>
+          <h2 className="font-semibold text-gray-900 dark:text-white">Ingest URLs</h2>
+          <p className="text-xs text-gray-500 dark:text-white/40">One URL per line · http(s) only</p>
         </div>
       </div>
 
@@ -252,7 +252,7 @@ function CollectionStats() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-white flex items-center gap-2"><span>📊</span> Collection Stats</h2>
+        <h2 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2"><span>📊</span> Collection Stats</h2>
         <button onClick={() => refetch()} disabled={isLoading} className="ghost-btn text-xs py-1.5 px-3">
           {isLoading ? <Spinner size={3} /> : (
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,8 +283,8 @@ function CollectionStats() {
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
                   style={{ background: `${accent}15`, border: `1px solid ${accent}30` }}>{icon}</div>
                 <div>
-                  <p className="text-xs text-white/40 uppercase tracking-widest font-medium">{label}</p>
-                  <p className="text-2xl font-bold text-white mt-0.5">{value}</p>
+                  <p className="text-xs text-gray-500 dark:text-white/40 uppercase tracking-widest font-medium">{label}</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white mt-0.5">{value}</p>
                 </div>
               </div>
             ))}
@@ -292,11 +292,11 @@ function CollectionStats() {
 
           {data.collections.length > 0 && (
             <div className="glass-card p-4 space-y-2 animate-fade-in">
-              <p className="text-xs text-white/40 uppercase tracking-widest font-medium mb-3">Individual Collections</p>
+              <p className="text-xs text-gray-500 dark:text-white/40 uppercase tracking-widest font-medium mb-3">Individual Collections</p>
               {data.collections.map((col) => (
                 <div key={col.name} className="flex items-center justify-between py-2 px-3 rounded-lg"
-                  style={{ background: 'rgba(255,255,255,0.03)' }}>
-                  <span className="text-sm text-white/70 font-medium truncate">{col.name}</span>
+                  style={{ background: 'rgba(0,0,0,0.02)' }}>
+                  <span className="text-sm text-gray-700 dark:text-white/70 font-medium truncate">{col.name}</span>
                   <span className="text-xs font-semibold shrink-0 ml-2 px-2 py-0.5 rounded-full"
                     style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.25)', color: '#3b82f6' }}>
                     {col.vectors.toLocaleString()} vectors
@@ -340,8 +340,8 @@ function IndexedSources() {
             🗂️
           </div>
           <div>
-            <h2 className="font-semibold text-white">Indexed Sources</h2>
-            <p className="text-xs text-white/40">{sources.length} source{sources.length !== 1 ? 's' : ''} in the knowledge base</p>
+            <h2 className="font-semibold text-gray-900 dark:text-white">Indexed Sources</h2>
+            <p className="text-xs text-gray-500 dark:text-white/40">{sources.length} source{sources.length !== 1 ? 's' : ''} in the knowledge base</p>
           </div>
         </div>
         <button onClick={() => refetch()} disabled={isLoading} className="ghost-btn text-xs py-1.5 px-3">
@@ -358,33 +358,33 @@ function IndexedSources() {
       {isError && <div className="error-banner" role="alert"><span>Failed to load sources.</span></div>}
 
       {!isLoading && sources.length === 0 && (
-        <p className="text-white/30 text-sm text-center py-6">No documents indexed yet.</p>
+        <p className="text-gray-500 dark:text-white/40 text-sm text-center py-6">No documents indexed yet.</p>
       )}
 
       {sources.length > 0 && (
         <ul className="space-y-2">
           {sources.map((src) => (
             <li key={src} className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl"
-              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <span className="text-sm text-white/70 truncate flex-1" title={src}>
+              style={{ background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(0,0,0,0.06)' }}>
+              <span className="text-sm text-gray-700 dark:text-white/70 truncate flex-1" title={src}>
                 {src.startsWith('http') ? '🌐' : '📄'} {src}
               </span>
 
               {confirmDelete === src ? (
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-white/40">Delete?</span>
+                  <span className="text-xs text-gray-500 dark:text-white/40">Delete?</span>
                   <button onClick={() => deleteMutation.mutate(src)} disabled={deleteMutation.isPending}
                     className="text-xs px-2 py-1 rounded-lg text-red-400 border border-red-500/30 hover:bg-red-500/10 transition-colors disabled:opacity-40">
                     {deleteMutation.isPending ? <Spinner size={3} /> : 'Yes'}
                   </button>
                   <button onClick={() => setConfirmDelete(null)}
-                    className="text-xs px-2 py-1 rounded-lg text-white/40 border border-white/10 hover:bg-white/5 transition-colors">
+                    className="text-xs px-2 py-1 rounded-lg text-gray-500 dark:text-white/40 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
                     No
                   </button>
                 </div>
               ) : (
                 <button onClick={() => setConfirmDelete(src)}
-                  className="shrink-0 text-white/20 hover:text-red-400 transition-colors text-lg leading-none"
+                  className="shrink-0 text-gray-300 dark:text-white/20 hover:text-red-400 transition-colors text-lg leading-none"
                   aria-label={`Delete ${src}`}>
                   ×
                 </button>
@@ -406,7 +406,7 @@ export default function AdminPage() {
         <div className="max-w-4xl mx-auto w-full px-4 py-8 space-y-8">
           <div className="animate-fade-in">
             <h1 className="text-2xl font-bold text-gradient">Admin Panel</h1>
-            <p className="text-white/40 text-sm mt-1">Manage your knowledge base — upload documents or ingest URLs.</p>
+            <p className="text-gray-500 dark:text-white/40 text-sm mt-1">Manage your knowledge base — upload documents or ingest URLs.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 animate-slide-up">
             <FileUploadSection />

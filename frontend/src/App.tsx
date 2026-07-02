@@ -4,9 +4,11 @@ import ChatPage from './pages/ChatPage'
 import AdminPage from './pages/AdminPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
+import ThemeProvider from './components/ThemeProvider'
 
 export default function App() {
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <Routes>
         {/* Public */}
@@ -37,5 +39,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/chat" replace />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   )
 }
