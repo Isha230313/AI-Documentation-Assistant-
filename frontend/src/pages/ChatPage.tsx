@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import { sendMessage } from '../api/chat'
 import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
+import { useThemeStore } from '../store/theme'
 import type { ChatMessage } from '../types'
 
 function TypingIndicator() {
@@ -13,7 +14,7 @@ function TypingIndicator() {
         style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)' }}>
         AI
       </div>
-      <div className="glass-card px-4 py-3 max-w-xs" style={{ borderColor: 'rgba(59,130,246,0.2)' }}>
+      <div className="glass-card px-4 py-3 max-w-xs">
         <div className="flex items-center gap-1.5">
           {[0, 1, 2].map((i) => (
             <span key={i} className="w-1.5 h-1.5 rounded-full bg-blue-400"
@@ -33,7 +34,7 @@ function Sources({ sources }: { sources: string[] }) {
     <div className="mt-2.5">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 text-xs text-blue-400/80 hover:text-cyan-300 transition-colors"
+        className="flex items-center gap-1.5 text-xs text-blue-500 hover:text-cyan-600 dark:text-blue-400/80 dark:hover:text-cyan-300 transition-colors"
       >
         <svg className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-90' : ''}`}
           fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,8 +47,8 @@ function Sources({ sources }: { sources: string[] }) {
         <ul className="mt-2 space-y-1 animate-fade-in">
           {sources.map((src, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <span className="text-blue-400/50 text-xs mt-0.5 shrink-0">›</span>
-              <span className="text-xs text-white/50 break-all leading-relaxed">{src}</span>
+              <span className="text-blue-400 text-xs mt-0.5 shrink-0">›</span>
+              <span className="text-xs text-gray-500 dark:text-white/50 break-all leading-relaxed">{src}</span>
             </li>
           ))}
         </ul>
@@ -62,7 +63,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       <div className="flex items-end justify-end gap-3 animate-fade-in">
         <div className="flex flex-col items-end gap-1 max-w-[72%]">
           <div className="px-4 py-3 rounded-2xl rounded-br-md text-sm leading-relaxed text-white"
-            style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)', boxShadow: '0 4px 20px rgba(59,130,246,0.3)' }}>
+            style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)', boxShadow: '0 4px 20px rgba(59,130,246,0.25)' }}>
             {message.content}
           </div>
         </div>
@@ -81,8 +82,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         AI
       </div>
       <div className="flex flex-col gap-1 max-w-[72%]">
-        <div className="glass-card px-4 py-3 text-sm leading-relaxed text-white/90"
-          style={{ borderColor: 'rgba(59,130,246,0.2)' }}>
+        <div className="glass-card px-4 py-3 text-sm leading-relaxed text-gray-800 dark:text-white/90">
           <p className="whitespace-pre-wrap">{message.content}</p>
           {message.sources && <Sources sources={message.sources} />}
         </div>
@@ -102,18 +102,18 @@ function EmptyState({ onSuggest }: { onSuggest: (q: string) => void }) {
   return (
     <div className="flex flex-col items-center justify-center flex-1 px-6 py-16 animate-fade-in">
       <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-6"
-        style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(6,182,212,0.2))', border: '1px solid rgba(59,130,246,0.3)' }}>
+        style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(6,182,212,0.1))', border: '1px solid rgba(59,130,246,0.2)' }}>
         💬
       </div>
-      <h2 className="text-2xl font-bold text-white mb-2">Ask your docs anything</h2>
-      <p className="text-white/40 text-sm mb-8 text-center max-w-sm">
+      <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Ask your docs anything</h2>
+      <p className="text-sm mb-8 text-center max-w-sm text-gray-500 dark:text-white/40">
         I can answer questions about your documentation. Try one of these to get started:
       </p>
       <div className="flex flex-wrap gap-3 justify-center max-w-lg">
         {SUGGESTIONS.map((q) => (
           <button key={q} onClick={() => onSuggest(q)}
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-cyan-300 transition-all duration-200 hover:scale-105"
-            style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)' }}>
+            className="px-4 py-2.5 rounded-xl text-sm font-medium text-blue-600 dark:text-cyan-300 hover:scale-105 transition-all duration-200"
+            style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)' }}>
             {q}
           </button>
         ))}
@@ -123,17 +123,28 @@ function EmptyState({ onSuggest }: { onSuggest: (q: string) => void }) {
 }
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const { isDark } = useThemeStore()
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    try {
+      const saved = localStorage.getItem('chat_history')
+      return saved ? JSON.parse(saved) : []
+    } catch {
+      return []
+    }
+  })
   const [input, setInput] = useState('')
   const [apiError, setApiError] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
+    localStorage.setItem('chat_history', JSON.stringify(messages))
+  }, [messages])
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Auto-grow textarea
   useEffect(() => {
     const el = textareaRef.current
     if (!el) return
@@ -153,7 +164,6 @@ export default function ChatPage() {
       }])
     },
     onError: (error: unknown) => {
-      // Remove the optimistic user message that was added before the request
       setMessages((prev) => prev.slice(0, -1))
       if (error instanceof AxiosError) {
         setApiError(error.response?.data?.detail ?? 'Failed to get a response. Please try again.')
@@ -166,30 +176,17 @@ export default function ChatPage() {
   const handleSubmit = (question?: string) => {
     const text = (question ?? input).trim()
     if (!text || sendMutation.isPending) return
-
     setApiError(null)
     setInput('')
     setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', content: text }])
     sendMutation.mutate(text)
   }
 
-  const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    handleSubmit()
-  }
-
+  const handleFormSubmit = (e: FormEvent) => { e.preventDefault(); handleSubmit() }
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSubmit()
-    }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() }
   }
-
-  const handleClear = () => {
-    setMessages([])
-    setApiError(null)
-    sendMutation.reset()
-  }
+  const handleClear = () => { setMessages([]); setApiError(null); sendMutation.reset(); localStorage.removeItem('chat_history') }
 
   return (
     <Layout>
@@ -211,17 +208,20 @@ export default function ChatPage() {
             <div className="error-banner" role="alert">
               <span>{apiError}</span>
               <button onClick={() => setApiError(null)}
-                className="ml-auto text-red-300/60 hover:text-red-300 text-lg leading-none" aria-label="Dismiss">
+                className="ml-auto text-red-400 hover:text-red-600 text-lg leading-none" aria-label="Dismiss">
                 ×
               </button>
             </div>
           </div>
         )}
 
-        <div className="shrink-0 px-4 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="shrink-0 px-4 py-4" style={{ borderTop: isDark ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.06)' }}>
           <form onSubmit={handleFormSubmit} className="max-w-3xl mx-auto flex items-end gap-3">
             <div className="flex-1 flex items-end gap-2 rounded-2xl px-4 py-3"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{
+                background: isDark ? 'rgba(255,255,255,0.05)' : '#f3f4f6',
+                border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
+              }}>
               <textarea
                 ref={textareaRef}
                 value={input}
@@ -230,7 +230,8 @@ export default function ChatPage() {
                 placeholder="Ask a question about your documentation…"
                 disabled={sendMutation.isPending}
                 rows={1}
-                className="flex-1 bg-transparent text-white text-sm placeholder-white/30 resize-none outline-none leading-relaxed scrollbar-thin disabled:opacity-50"
+                className={`flex-1 bg-transparent text-sm resize-none outline-none leading-relaxed scrollbar-thin disabled:opacity-50
+                  ${isDark ? 'text-white placeholder-white/30' : 'text-gray-900 placeholder-gray-400'}`}
                 style={{ maxHeight: '160px', minHeight: '24px' }}
                 aria-label="Chat input"
               />
@@ -256,7 +257,7 @@ export default function ChatPage() {
               </button>
             </div>
           </form>
-          <p className="text-center text-white/20 text-[11px] mt-2">
+          <p className={`text-center text-[11px] mt-2 ${isDark ? 'text-white/20' : 'text-gray-400'}`}>
             Press Enter to send · Shift+Enter for new line
           </p>
         </div>

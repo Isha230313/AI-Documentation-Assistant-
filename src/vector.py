@@ -2,7 +2,7 @@ import hashlib
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 from langchain_qdrant import QdrantVectorStore
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIMENSIONS, RETRIEVER_K, RETRIEVER_SEARCH_TYPE
+from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIMENSIONS, RETRIEVER_K, RETRIEVER_SEARCH_TYPE, RETRIEVER_SCORE_THRESHOLD
 
 
 def get_client():
@@ -42,9 +42,10 @@ def store_chunks(chunks, embeddings):
 
 
 def get_retriever(embeddings):
-    client       = get_client()
+    client = get_client()
+    ensure_collection(client)
     vector_store = QdrantVectorStore(client=client, collection_name=COLLECTION_NAME, embedding=embeddings)
     return vector_store.as_retriever(
         search_type=RETRIEVER_SEARCH_TYPE,
-        search_kwargs={"k": RETRIEVER_K},
+        search_kwargs={"k": RETRIEVER_K, "score_threshold": RETRIEVER_SCORE_THRESHOLD},
     )
