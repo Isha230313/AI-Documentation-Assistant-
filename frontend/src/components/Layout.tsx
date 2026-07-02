@@ -86,6 +86,9 @@ export default function Layout({ children }: Props) {
 
           {user && (
             <div className="flex items-center gap-2 ml-1">
+              <span className={`text-xs hidden sm:block ${isDark ? 'text-white/40' : 'text-gray-500'}`}>
+                {user.username}
+              </span>
               <button
                 onClick={logout}
                 className={`ghost-btn text-xs border-red-200 hover:border-red-300 hover:bg-red-50
