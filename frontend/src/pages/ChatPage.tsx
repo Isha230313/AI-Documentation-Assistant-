@@ -121,6 +121,38 @@ function MessageBubble({ message }: { message: ChatMessage }) {
                   {children}
                 </code>
               ),
+              table: ({ children }) => (
+                <div className="overflow-x-auto my-3">
+                  <table className="w-full text-xs border-collapse">
+                    {children}
+                  </table>
+                </div>
+              ),
+              thead: ({ children }) => (
+                <thead className="bg-gradient-to-r from-blue-500/20 to-cyan-400/20">
+                  {children}
+                </thead>
+              ),
+              tbody: ({ children }) => (
+                <tbody className="divide-y divide-blue-400/10">
+                  {children}
+                </tbody>
+              ),
+              tr: ({ children }) => (
+                <tr className="hover:bg-blue-400/5 transition-colors">
+                  {children}
+                </tr>
+              ),
+              th: ({ children }) => (
+                <th className="px-3 py-2 text-left font-semibold text-blue-500 dark:text-cyan-300 border border-blue-400/20">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="px-3 py-2 text-gray-700 dark:text-white/80 border border-blue-400/10">
+                  {children}
+                </td>
+              ),
             }}
           >
             {message.content}
