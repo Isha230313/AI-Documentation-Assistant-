@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, type FormEvent, type KeyboardEvent } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import ReactMarkdown from 'react-markdown'
 import { sendMessage } from '../api/chat'
 import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
@@ -82,8 +83,48 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         AI
       </div>
       <div className="flex flex-col gap-1 max-w-[72%]">
-        <div className="glass-card px-4 py-3 text-sm leading-relaxed text-gray-800 dark:text-white/90">
-          <p className="whitespace-pre-wrap">{message.content}</p>
+        <div className="glass-card px-4 py-3 text-sm leading-relaxed text-gray-800 dark:text-white/90 prose-ai">
+          <ReactMarkdown
+            components={{
+              h1: ({ children }) => (
+                <h1 className="text-xl font-bold mt-4 mb-2 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent border-b border-blue-400/30 pb-1">
+                  {children}
+                </h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-base font-bold mt-3 mb-1.5 text-blue-500 dark:text-cyan-300">
+                  {children}
+                </h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-sm font-semibold mt-2.5 mb-1 text-blue-400 dark:text-cyan-400/80">
+                  {children}
+                </h3>
+              ),
+              p: ({ children }) => (
+                <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>
+              ),
+              ul: ({ children }) => (
+                <ul className="mb-2 ml-4 list-disc space-y-0.5">{children}</ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="mb-2 ml-4 list-decimal space-y-0.5">{children}</ol>
+              ),
+              li: ({ children }) => (
+                <li className="leading-relaxed">{children}</li>
+              ),
+              strong: ({ children }) => (
+                <strong className="font-semibold text-gray-900 dark:text-white">{children}</strong>
+              ),
+              code: ({ children }) => (
+                <code className="px-1 py-0.5 rounded text-xs font-mono bg-blue-50 dark:bg-white/10 text-blue-700 dark:text-cyan-300">
+                  {children}
+                </code>
+              ),
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
           {message.sources && <Sources sources={message.sources} />}
         </div>
       </div>
