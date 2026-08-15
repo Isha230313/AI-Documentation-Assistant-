@@ -40,6 +40,7 @@ function FileUploadSection() {
       setFiles([])
       setUploadProgress(0)
       queryClient.invalidateQueries({ queryKey: ['collections'] })
+      queryClient.invalidateQueries({ queryKey: ['sources'] })
     },
     onError: (error: unknown) => {
       setErrorMsg(error instanceof AxiosError
@@ -173,6 +174,7 @@ function UrlIngestSection() {
       setErrorMsg(null)
       setUrlText('')
       queryClient.invalidateQueries({ queryKey: ['collections'] })
+      queryClient.invalidateQueries({ queryKey: ['sources'] })
     },
     onError: (error: unknown) => {
       setErrorMsg(error instanceof AxiosError
